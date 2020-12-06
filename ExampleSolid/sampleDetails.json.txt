@@ -1,0 +1,32 @@
+{
+  "WashingType": "Standard",
+  "Make": "Ferrari",
+  "Rinsing": 7,
+  "Drying": 10
+}
+{
+  "WashingType": "StandardPlus",
+  "VacuumingInside": 15,
+  "WashingInside": 20,
+}
+{
+  "WashingType": "Waxing",
+  "Double": "true"
+}
+
+{
+  "WashingType": "Standard",
+  "Make": "Ford",
+  "Rinsing": 10,
+  "Drying": 15
+}
+{
+  "WashingType": "StandardPlus",
+  "Make": "Audi",
+  "VacuumingInside": 20,
+  "WashingInside": 30,
+}
+{
+  "WashingType": "Waxing",
+  "Double": "false"
+}
