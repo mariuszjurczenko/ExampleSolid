@@ -8,24 +8,18 @@ namespace ExampleSolid.Test
     {
         private CarWash carWash;
         private FakeLogger logger;
+        private FakeDetailsSource detailsSource;
         public CarWashTest()
         {
             logger = new FakeLogger();
-            carWash = new CarWash(logger);
+            detailsSource = new FakeDetailsSource();
+            carWash = new CarWash(logger, detailsSource);
         }
 
         [Test]
         public void ReturnsPricingOf77ForWashingTypeStandardOf20RinsingOf7DryingOf10MakeOfFerrari()     
         {
-            var details = new Details
-            {
-                WashingType = WashingType.Standard,
-                Make = "Ferrari",
-                Rinsing = 7,
-                Drying = 10
-            };
-            string json = JsonConvert.SerializeObject(details);
-            File.WriteAllText("details.json", json);
+            detailsSource.DetailsString = "{\"WashingType\": \"Standard\", \"Make\": \"Ferrari\", \"Rinsing\": 7, \"Drying\": 10}";
 
             carWash.Pricing();
             var result = carWash.WashingCost;
@@ -36,15 +30,7 @@ namespace ExampleSolid.Test
         [Test]
         public void ReturnsPricingOf37ForWashingTypeStandardOf20RinsingOf7DryingOf10()
         {
-            var details = new Details
-            {
-                WashingType = WashingType.Standard,
-                Make = "Mazda",
-                Rinsing = 7,
-                Drying = 10
-            };
-            string json = JsonConvert.SerializeObject(details);
-            File.WriteAllText("details.json", json);
+            detailsSource.DetailsString = "{\"WashingType\": \"Standard\", \"Make\": \"Mazda\", \"Rinsing\": 7, \"Drying\": 10}";
 
             carWash.Pricing();
             var result = carWash.WashingCost;
@@ -55,16 +41,9 @@ namespace ExampleSolid.Test
         [Test]
         public void ReturnsPricingOf0ForMakeNull()     
         {
-            var details = new Details
-            {
-                WashingType = WashingType.StandardPlus,
-                VacuumingInside = 15,
-                WashingInside = 20,
-            };
-            string json = JsonConvert.SerializeObject(details);
-            File.WriteAllText("details.json", json);
+            detailsSource.DetailsString = "{\"WashingType\": \"StandardPlus\", \"VacuumingInside\": 15, \"WashingInside\": 20}";
 
-            carWash = new CarWash(logger);
+            carWash = new CarWash(logger, detailsSource);
             carWash.Pricing();
             var result = carWash.WashingCost;
 
@@ -74,6 +53,7 @@ namespace ExampleSolid.Test
         [Test]
         public void LogsStartingLoadingAndCompleting() 
         {
+            detailsSource.DetailsString = "{\"WashingType\": \"Standard\", \"Make\": \"Ford\", \"Rinsing\": 7, \"Drying\": 10}";
             var details = new Details
             {
                 WashingType = WashingType.Standard,

@@ -2,7 +2,7 @@
 
 namespace ExampleSolid
 {
-    public class FileDetailsSource
+    public class FileDetailsSource : IDetailsSource
     {
         public string GetDetailsFromSource() 
         {

@@ -2,7 +2,14 @@
 {
     internal class DefaultContext : ICarWashContext
     {
+        private readonly IDetailsSource _detailsSource;
+
         public CarWash CarWash { get; set; }
+
+        public DefaultContext(IDetailsSource detailsSource)
+        {
+            _detailsSource = detailsSource;
+        }
 
         public DetailsPricing CreateDetailsPricingForDetails(Details details, ICarWashContext context)
         {
@@ -21,7 +28,7 @@
 
         public string LoadDetailsFromFile()
         {
-            return new FileDetailsSource().GetDetailsFromSource();
+            return _detailsSource.GetDetailsFromSource();
         }
 
         public string LoadDetailsFromURI(string uri)

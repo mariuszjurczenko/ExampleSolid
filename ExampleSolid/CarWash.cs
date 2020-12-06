@@ -6,13 +6,16 @@
     public class CarWash
     {
         private readonly ILogger _logger;
+        private readonly IDetailsSource _detailsSource;
         public decimal WashingCost { get; set; }
-        public ICarWashContext Context { get; set; } = new DefaultContext();
+        public ICarWashContext Context { get; set; }
 
-        public CarWash(ILogger logger)
+        public CarWash(ILogger logger, IDetailsSource detailsSource)
         {
-            Context.CarWash = this;
             _logger = logger;
+            _detailsSource = detailsSource;
+            Context = new DefaultContext(_detailsSource);
+            Context.CarWash = this;
         }
 
         public void Pricing()
