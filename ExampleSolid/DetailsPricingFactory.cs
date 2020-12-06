@@ -1,25 +1,21 @@
-﻿namespace ExampleSolid
+﻿using System;
+
+namespace ExampleSolid
 {
     public class DetailsPricingFactory
     {
         public DetailsPricing Create(Details details, CarWash carWash)
         {
-            switch (details.WashingType)
+            try
             {
-                case WashingType.Standard:
-                    return new StandardDetailsPricing(carWash, carWash.Logger);
-
-                case WashingType.StandardPlus:
-                    return new StandardPlusDetailsPricing(carWash, carWash.Logger);
-
-                case WashingType.Waxing:
-                    return new WaxingDetailsPricing(carWash, carWash.Logger);
-
-                case WashingType.Premium:
-                    return new PremiumDetailsPricing(carWash, carWash.Logger);
-
-                default:
-                    return null;
+                var detailsPricing = (DetailsPricing)Activator.CreateInstance(
+                                        Type.GetType($"ExampleSolid.{details.WashingType}DetailsPricing"),
+                                            new object[] { carWash, carWash.Logger });
+                return detailsPricing;
+            }
+            catch (System.Exception)
+            {
+                return null;
             }
         }
     }
