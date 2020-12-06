@@ -3,7 +3,7 @@
     public abstract class DetailsPricing
     {
         protected readonly ICarWashUpdater _carWashUpdater;
-        protected ILogger Logger { get; set; } = new ConsoleLogger();
+        public ILogger Logger { get; set; } = new ConsoleLogger();
 
         public DetailsPricing(ICarWashUpdater carWashUpdater) 
         {
