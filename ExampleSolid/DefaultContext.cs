@@ -20,7 +20,7 @@
 
         public Details GetDetailsFromJsonString(string detailsJson)
         {
-            return new JsonDetailsSerializer().GetDetailsFromJsonString(detailsJson);
+            return _detailsSerializer.GetDetailsFromJsonString(detailsJson);
         }
 
         public Details GetDetailsFromXmlString(string detailsXml)
