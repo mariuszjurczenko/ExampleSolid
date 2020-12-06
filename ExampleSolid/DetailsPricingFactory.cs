@@ -8,14 +8,14 @@ namespace ExampleSolid
         {
             try
             {
-                var detailsPricing = (DetailsPricing)Activator.CreateInstance(
-                                        Type.GetType($"ExampleSolid.{details.WashingType}DetailsPricing"),
-                                            new object[] { carWash, carWash.Logger });
-                return detailsPricing;
+                return (DetailsPricing)Activator.CreateInstance(
+                            Type.GetType($"ExampleSolid.{details.WashingType}DetailsPricing"),
+                                new object[] { carWash, carWash.Logger });
+                 
             }
             catch (System.Exception)
             {
-                return null;
+                return new UnknownDetailsPricing(carWash, carWash.Logger);
             }
         }
     }

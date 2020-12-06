@@ -28,7 +28,7 @@ namespace ExampleSolid
 
             var pricing = factory.Create(details, this);
 
-            pricing?.Pricing(details);
+            pricing.Pricing(details);
 
             Logger.Log("Pricing completed.");
         }
