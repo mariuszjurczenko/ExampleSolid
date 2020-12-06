@@ -2,12 +2,12 @@
 {
     public abstract class DetailsPricing
     {
-        protected readonly ICarWashContext _context;
+        protected readonly ICarWashUpdater _carWashUpdater;
         protected ILogger Logger { get; set; } = new ConsoleLogger();
 
-        public DetailsPricing(ICarWashContext context)
+        public DetailsPricing(ICarWashUpdater carWashUpdater) 
         {
-            _context = context;
+            _carWashUpdater = carWashUpdater;
         }
         public abstract void Pricing(Details details);
     }

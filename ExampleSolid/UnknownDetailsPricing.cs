@@ -2,7 +2,7 @@
 {
     public class UnknownDetailsPricing : DetailsPricing
     {
-        public UnknownDetailsPricing(ICarWashContext context) : base(context)
+        public UnknownDetailsPricing(ICarWashUpdater carWashUpdater) : base(carWashUpdater)
         {
         }
 

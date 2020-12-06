@@ -4,7 +4,7 @@ namespace ExampleSolid
 {
     public class StandardDetailsPricing : DetailsPricing
     {
-        public StandardDetailsPricing(ICarWashContext context) : base(context)
+        public StandardDetailsPricing(ICarWashUpdater carWashUpdater) : base(carWashUpdater)
         {
         }
 
@@ -24,7 +24,7 @@ namespace ExampleSolid
             }
             baseWashingCost += details.Rinsing;
             baseWashingCost += details.Drying;
-            _context.UpdateWashingCost(baseWashingCost);
+            _carWashUpdater.UpdateWashingCost(baseWashingCost);
         }
     }
 }

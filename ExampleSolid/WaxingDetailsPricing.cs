@@ -2,7 +2,7 @@
 {
     public class WaxingDetailsPricing : DetailsPricing
     {
-        public WaxingDetailsPricing(ICarWashContext context) : base(context)
+        public WaxingDetailsPricing(ICarWashUpdater carWashUpdater) : base(carWashUpdater)
         {
         }
 
@@ -15,7 +15,7 @@
             {
                 baseWashingCost = baseWashingCost * 3;
             }
-            _context.UpdateWashingCost(baseWashingCost);
+            _carWashUpdater.UpdateWashingCost(baseWashingCost);
         }
     }
 }
