@@ -4,17 +4,17 @@ namespace ExampleSolid
 {
     public class PremiumDetailsPricing : DetailsPricing
     {
-        public PremiumDetailsPricing(CarWash carWash, ConsoleLogger logger) : base(carWash, logger)
+        public PremiumDetailsPricing(ICarWashContext context) : base(context)
         {
         }
 
         public override void Pricing(Details details)
         {
-            _logger.Log("Valuation for a premium program.");
-            _logger.Log("Valuation rules.");
+            _context.Log("Valuation for a premium program.");
+            _context.Log("Valuation rules.");
             if (String.IsNullOrEmpty(details.Make))
             {
-                _logger.Log("Car make must be stated.");
+                _context.Log("Car make must be stated.");
                 return;
             }
             decimal baseWashingCost = 40;
@@ -25,7 +25,7 @@ namespace ExampleSolid
             {
                 baseWashingCost = baseWashingCost * 2;
             }
-            _carWash.WashingCost = baseWashingCost;
+            _context.UpdateWashingCost(baseWashingCost);
         }
     }
 }

@@ -4,22 +4,22 @@ namespace ExampleSolid
 {
     public class StandardPlusDetailsPricing : DetailsPricing
     {
-        public StandardPlusDetailsPricing(CarWash carWash, ConsoleLogger logger) : base(carWash, logger)
+        public StandardPlusDetailsPricing(ICarWashContext context) : base(context)
         {
         }
 
         public override void Pricing(Details details)
         {
-            _logger.Log("Valuation for a standartd plus program.");
-            _logger.Log("Valuation rules.");
+            _context.Log("Valuation for a standartd plus program.");
+            _context.Log("Valuation rules.");
             if (String.IsNullOrEmpty(details.Make))
             {
-                _logger.Log("Car make must be stated");
+                _context.Log("Car make must be stated");
                 return;
             }
             if (details.VacuumingInside == 0 || details.WashingInside == 0)
             {
-                _logger.Log("Standard Plus must specify Vacuuming Inside and Washing Inside.");
+                _context.Log("Standard Plus must specify Vacuuming Inside and Washing Inside.");
                 return;
             }
             decimal baseWashingCost = 25;
@@ -33,7 +33,7 @@ namespace ExampleSolid
             }
             baseWashingCost += details.VacuumingInside;
             baseWashingCost += details.WashingInside;
-            _carWash.WashingCost = baseWashingCost;
+            _context.UpdateWashingCost(baseWashingCost);
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.IO;
-
-namespace ExampleSolid
+﻿namespace ExampleSolid
 {
     /// <summary>
     /// CarWash odczytuje szczegóły mycia z pliku i tworzy wycene mycia na podstawie szczegółów.
@@ -11,26 +6,27 @@ namespace ExampleSolid
     public class CarWash
     {
         public decimal WashingCost { get; set; }
-        public ConsoleLogger Logger { get; set; } = new ConsoleLogger();
-        public FileDetailsSource DetailsSource { get; set; } = new FileDetailsSource();
-        public JsonDetailsSerializer DetailsSerializer { get; set; } = new JsonDetailsSerializer();
+        public ICarWashContext Context { get; set; } = new DefaultContext();
+
+        public CarWash()
+        {
+            Context.CarWash = this;
+        }
 
         public void Pricing()
         {
-            Logger.Log("Starting pricing.");
-            Logger.Log("Loading details.");
+            Context.Log("Starting pricing.");
+            Context.Log("Loading details.");
 
-            string detailsJson = DetailsSource.GetDetailsFromSource();
+            string detailsJson = Context.LoadDetailsFromFile();
 
-            var details = DetailsSerializer.GetDetailsFromJsonString(detailsJson);
+            var details = Context.GetDetailsFromJsonString(detailsJson);
 
-            var factory = new DetailsPricingFactory();
-
-            var pricing = factory.Create(details, this);
+            var pricing = Context.CreateDetailsPricingForDetails(details, Context);
 
             pricing.Pricing(details);
 
-            Logger.Log("Pricing completed.");
+            Context.Log("Pricing completed.");
         }
     }
 }

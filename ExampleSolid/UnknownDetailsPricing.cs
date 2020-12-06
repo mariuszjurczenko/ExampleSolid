@@ -2,13 +2,13 @@
 {
     public class UnknownDetailsPricing : DetailsPricing
     {
-        public UnknownDetailsPricing(CarWash carWash, ConsoleLogger logger) : base(carWash, logger)
+        public UnknownDetailsPricing(ICarWashContext context) : base(context)
         {
         }
 
         public override void Pricing(Details details)
         {
-            _logger.Log("Unknown type of Washing.");
+            _context.Log("Unknown type of Washing.");
         }
     }
 }
