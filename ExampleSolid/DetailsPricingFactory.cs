@@ -10,12 +10,12 @@ namespace ExampleSolid
             {
                 return (DetailsPricing)Activator.CreateInstance(
                             Type.GetType($"ExampleSolid.{details.WashingType}DetailsPricing"),
-                                new object[] { context });
+                                new object[] { new CarWashUpdater(context.CarWash) });
                  
             }
             catch (System.Exception)
             {
-                return new UnknownDetailsPricing(context);
+                return new UnknownDetailsPricing(new CarWashUpdater(context.CarWash));
             }
         }
     }

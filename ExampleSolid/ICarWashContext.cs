@@ -1,6 +1,6 @@
 ﻿namespace ExampleSolid
 {
-    public interface ICarWashContext : ILogger, ICarWashUpdater
+    public interface ICarWashContext : ILogger
     {
         string LoadDetailsFromFile();
         string LoadDetailsFromURI(string uri);
@@ -8,6 +8,5 @@
         Details GetDetailsFromXmlString(string detailsXml);
         DetailsPricing CreateDetailsPricingForDetails(Details details, ICarWashContext context);
         CarWash CarWash { get; set; }
-        ConsoleLogger Logger { get; }
     }
 }

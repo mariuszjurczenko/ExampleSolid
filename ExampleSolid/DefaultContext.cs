@@ -4,8 +4,6 @@
     {
         public CarWash CarWash { get; set; }
 
-        public ConsoleLogger Logger => new ConsoleLogger();
-
         public DetailsPricing CreateDetailsPricingForDetails(Details details, ICarWashContext context)
         {
             return new DetailsPricingFactory().Create(details, context);
@@ -34,11 +32,6 @@
         public void Log(string message)
         {
             new ConsoleLogger().Log(message);
-        }
-
-        public void UpdateWashingCost(decimal washingCost)
-        {
-            CarWash.WashingCost = washingCost;
         }
     }
 }
