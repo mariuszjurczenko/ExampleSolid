@@ -3,12 +3,14 @@
     internal class DefaultContext : ICarWashContext
     {
         private readonly IDetailsSource _detailsSource;
+        private readonly IDetailsSerializer _detailsSerializer;
 
         public CarWash CarWash { get; set; }
 
-        public DefaultContext(IDetailsSource detailsSource)
+        public DefaultContext(IDetailsSource detailsSource, IDetailsSerializer detailsSerializer)
         {
             _detailsSource = detailsSource;
+            _detailsSerializer = detailsSerializer;
         }
 
         public DetailsPricing CreateDetailsPricingForDetails(Details details, ICarWashContext context)

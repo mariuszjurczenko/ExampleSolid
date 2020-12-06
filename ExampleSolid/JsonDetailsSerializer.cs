@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 
 namespace ExampleSolid
 {
-    public class JsonDetailsSerializer 
+    public class JsonDetailsSerializer : IDetailsSerializer
     {
         public Details GetDetailsFromJsonString(string jsonString)
         {

@@ -7,14 +7,17 @@
     {
         private readonly ILogger _logger;
         private readonly IDetailsSource _detailsSource;
+        private readonly IDetailsSerializer _detailsSerializer;
+
         public decimal WashingCost { get; set; }
         public ICarWashContext Context { get; set; }
 
-        public CarWash(ILogger logger, IDetailsSource detailsSource)
+        public CarWash(ILogger logger, IDetailsSource detailsSource, IDetailsSerializer detailsSerializer)
         {
             _logger = logger;
             _detailsSource = detailsSource;
-            Context = new DefaultContext(_detailsSource);
+            _detailsSerializer = detailsSerializer;
+            Context = new DefaultContext(_detailsSource, _detailsSerializer);
             Context.CarWash = this;
         }
 
@@ -23,9 +26,9 @@
             _logger.Log("Starting pricing.");
             _logger.Log("Loading details.");
 
-            string detailsJson = Context.LoadDetailsFromFile();
+            string detailsJson = _detailsSource.GetDetailsFromSource();
 
-            var details = Context.GetDetailsFromJsonString(detailsJson);
+            var details = _detailsSerializer.GetDetailsFromJsonString(detailsJson);
 
             var pricing = Context.CreateDetailsPricingForDetails(details, Context);
 

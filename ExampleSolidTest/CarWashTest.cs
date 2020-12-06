@@ -9,47 +9,26 @@ namespace ExampleSolid.Test
         private CarWash carWash;
         private FakeLogger logger;
         private FakeDetailsSource detailsSource;
+        private FakeDetailsSerializer detailsSerializer;
         public CarWashTest()
         {
             logger = new FakeLogger();
             detailsSource = new FakeDetailsSource();
-            carWash = new CarWash(logger, detailsSource);
+            detailsSerializer = new FakeDetailsSerializer();
+            carWash = new CarWash(logger, detailsSource, detailsSerializer);
         }
 
         [Test]
         public void ReturnsPricingOf77ForWashingTypeStandardOf20RinsingOf7DryingOf10MakeOfFerrari()     
         {
             detailsSource.DetailsString = "{\"WashingType\": \"Standard\", \"Make\": \"Ferrari\", \"Rinsing\": 7, \"Drying\": 10}";
-
+            detailsSerializer.GetDetailsFromJsonString(detailsSource.DetailsString);
             carWash.Pricing();
             var result = carWash.WashingCost;
 
             Assert.AreEqual(77, result);
         }
-
-        [Test]
-        public void ReturnsPricingOf37ForWashingTypeStandardOf20RinsingOf7DryingOf10()
-        {
-            detailsSource.DetailsString = "{\"WashingType\": \"Standard\", \"Make\": \"Mazda\", \"Rinsing\": 7, \"Drying\": 10}";
-
-            carWash.Pricing();
-            var result = carWash.WashingCost;
-
-            Assert.AreEqual(37, result);
-        }
-
-        [Test]
-        public void ReturnsPricingOf0ForMakeNull()     
-        {
-            detailsSource.DetailsString = "{\"WashingType\": \"StandardPlus\", \"VacuumingInside\": 15, \"WashingInside\": 20}";
-
-            carWash = new CarWash(logger, detailsSource);
-            carWash.Pricing();
-            var result = carWash.WashingCost;
-
-            Assert.AreEqual(0, result);
-        }
-
+      
         [Test]
         public void LogsStartingLoadingAndCompleting() 
         {
