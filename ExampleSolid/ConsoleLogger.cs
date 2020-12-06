@@ -2,7 +2,7 @@
 
 namespace ExampleSolid
 {
-    public class ConsoleLogger
+    public class ConsoleLogger : ILogger
     {
         public void Log(string message)
         {

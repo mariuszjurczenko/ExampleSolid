@@ -10,16 +10,16 @@ namespace ExampleSolid
 
         public override void Pricing(Details details)
         {
-            _context.Log("Valuation for a standartd plus program.");
-            _context.Log("Valuation rules.");
+            Logger.Log("Valuation for a standartd plus program.");
+            Logger.Log("Valuation rules.");
             if (String.IsNullOrEmpty(details.Make))
             {
-                _context.Log("Car make must be stated");
+                Logger.Log("Car make must be stated");
                 return;
             }
             if (details.VacuumingInside == 0 || details.WashingInside == 0)
             {
-                _context.Log("Standard Plus must specify Vacuuming Inside and Washing Inside.");
+                Logger.Log("Standard Plus must specify Vacuuming Inside and Washing Inside.");
                 return;
             }
             decimal baseWashingCost = 25;

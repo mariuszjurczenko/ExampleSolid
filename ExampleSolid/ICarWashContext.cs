@@ -1,8 +1,7 @@
 ﻿namespace ExampleSolid
 {
-    public interface ICarWashContext
+    public interface ICarWashContext : ILogger
     {
-        void Log(string message);
         string LoadDetailsFromFile();
         string LoadDetailsFromURI(string uri);
         Details GetDetailsFromJsonString(string detailsJson);

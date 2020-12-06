@@ -8,8 +8,8 @@
 
         public override void Pricing(Details details)
         {
-            _context.Log("Valuation for a waxing program.");
-            _context.Log("Valuation rules.");
+            Logger.Log("Valuation for a waxing program.");
+            Logger.Log("Valuation rules.");
             decimal baseWashingCost = 40;
             if (details.Double)
             {

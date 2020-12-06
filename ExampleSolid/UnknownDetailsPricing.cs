@@ -8,7 +8,7 @@
 
         public override void Pricing(Details details)
         {
-            _context.Log("Unknown type of Washing.");
+            Logger.Log("Unknown type of Washing.");
         }
     }
 }
