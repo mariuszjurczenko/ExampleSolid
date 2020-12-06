@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSolid", "ExampleSolid\ExampleSolid.csproj", "{1F3E4DF6-97E4-47FA-8B10-3C5D9FE18F82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleSolid", "ExampleSolid\ExampleSolid.csproj", "{1F3E4DF6-97E4-47FA-8B10-3C5D9FE18F82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSolidTest", "ExampleSolidTest\ExampleSolidTest.csproj", "{D55C7427-FC68-49BC-9D72-46F55CFAB228}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleSolidTest", "ExampleSolidTest\ExampleSolidTest.csproj", "{D55C7427-FC68-49BC-9D72-46F55CFAB228}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExampleSolid", "WebExampleSolid\WebExampleSolid.csproj", "{D5CD6C12-C99F-41B5-848E-736057FD3242}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D55C7427-FC68-49BC-9D72-46F55CFAB228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D55C7427-FC68-49BC-9D72-46F55CFAB228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D55C7427-FC68-49BC-9D72-46F55CFAB228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CD6C12-C99F-41B5-848E-736057FD3242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CD6C12-C99F-41B5-848E-736057FD3242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CD6C12-C99F-41B5-848E-736057FD3242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CD6C12-C99F-41B5-848E-736057FD3242}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
