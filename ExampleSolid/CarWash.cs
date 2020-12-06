@@ -5,18 +5,20 @@
     /// </summary>
     public class CarWash
     {
+        private readonly ILogger _logger;
         public decimal WashingCost { get; set; }
         public ICarWashContext Context { get; set; } = new DefaultContext();
 
-        public CarWash()
+        public CarWash(ILogger logger)
         {
             Context.CarWash = this;
+            _logger = logger;
         }
 
         public void Pricing()
         {
-            Context.Log("Starting pricing.");
-            Context.Log("Loading details.");
+            _logger.Log("Starting pricing.");
+            _logger.Log("Loading details.");
 
             string detailsJson = Context.LoadDetailsFromFile();
 
@@ -26,7 +28,7 @@
 
             pricing.Pricing(details);
 
-            Context.Log("Pricing completed.");
+            _logger.Log("Pricing completed.");
         }
     }
 }

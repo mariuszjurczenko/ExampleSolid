@@ -1,6 +1,6 @@
 ﻿using ExampleSolid;
 
-namespace ExampleSolidTest
+namespace ExampleSolid.Test
 {
     class FakeCarWashUpdater : ICarWashUpdater
     {

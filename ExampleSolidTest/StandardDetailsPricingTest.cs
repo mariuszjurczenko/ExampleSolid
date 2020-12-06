@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Linq;
 
-namespace ExampleSolidTest
+namespace ExampleSolid.Test
 {
     public class StandardDetailsPricingTest
     {

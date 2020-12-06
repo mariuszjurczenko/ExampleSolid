@@ -1,7 +1,7 @@
 ﻿using ExampleSolid;
 using System.Collections.Generic;
 
-namespace ExampleSolidTest
+namespace ExampleSolid.Test
 {
     public class FakeLogger : ILogger
     {

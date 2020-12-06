@@ -6,6 +6,14 @@ namespace ExampleSolid.Test
 {
     public class CarWashTest
     {
+        private CarWash carWash;
+        private FakeLogger logger;
+        public CarWashTest()
+        {
+            logger = new FakeLogger();
+            carWash = new CarWash(logger);
+        }
+
         [Test]
         public void ReturnsPricingOf77ForWashingTypeStandardOf20RinsingOf7DryingOf10MakeOfFerrari()     
         {
@@ -19,7 +27,6 @@ namespace ExampleSolid.Test
             string json = JsonConvert.SerializeObject(details);
             File.WriteAllText("details.json", json);
 
-            var carWash = new CarWash();
             carWash.Pricing();
             var result = carWash.WashingCost;
 
@@ -39,7 +46,6 @@ namespace ExampleSolid.Test
             string json = JsonConvert.SerializeObject(details);
             File.WriteAllText("details.json", json);
 
-            var carWash = new CarWash();
             carWash.Pricing();
             var result = carWash.WashingCost;
 
@@ -58,11 +64,32 @@ namespace ExampleSolid.Test
             string json = JsonConvert.SerializeObject(details);
             File.WriteAllText("details.json", json);
 
-            var carWash = new CarWash();
+            carWash = new CarWash(logger);
             carWash.Pricing();
             var result = carWash.WashingCost;
 
             Assert.AreEqual(0, result);
-        }     
+        }
+
+        [Test]
+        public void LogsStartingLoadingAndCompleting() 
+        {
+            var details = new Details
+            {
+                WashingType = WashingType.Standard,
+                Make = "Ford",
+                Rinsing = 7,
+                Drying = 10
+            };
+            string json = JsonConvert.SerializeObject(details);
+            File.WriteAllText("details.json", json);
+
+            carWash.Pricing();
+            var result = carWash.WashingCost;
+
+            Assert.Contains("Starting pricing.", logger.LoggedMessages);
+            Assert.Contains("Loading details.", logger.LoggedMessages);
+            Assert.Contains("Pricing completed.", logger.LoggedMessages);
+        }
     }
 }
