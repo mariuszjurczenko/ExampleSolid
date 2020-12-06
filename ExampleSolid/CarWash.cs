@@ -24,27 +24,11 @@ namespace ExampleSolid
 
             var details = DetailsSerializer.GetDetailsFromJsonString(detailsJson);
 
-            switch (details.WashingType)
-            {
-                case WashingType.Standard:
-                    var standard = new StandardDetailsPricing(this, this.Logger);
-                    standard.Pricing(details);
-                    break;
+            var factory = new DetailsPricingFactory();
 
-                case WashingType.StandardPlus:
-                    var standardPlus = new StandardPlusDetailsPricing(this, this.Logger);
-                    standardPlus.Pricing(details);
-                    break;
+            var pricing = factory.Create(details, this);
 
-                case WashingType.Waxing:
-                    var waxing = new WaxingDetailsPricing(this, this.Logger);
-                    waxing.Pricing(details);
-                    break;
-
-                default:
-                    Logger.Log("Unknown type of Washing.");
-                    break;
-            }
+            pricing.Pricing(details);
 
             Logger.Log("Pricing completed.");
         }

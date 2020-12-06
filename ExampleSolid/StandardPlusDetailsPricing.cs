@@ -2,18 +2,13 @@
 
 namespace ExampleSolid
 {
-    public class StandardPlusDetailsPricing
+    public class StandardPlusDetailsPricing : DetailsPricing
     {
-        private readonly CarWash _carWash;
-        private ConsoleLogger _logger;
-
-        public StandardPlusDetailsPricing(CarWash carWash, ConsoleLogger logger)
+        public StandardPlusDetailsPricing(CarWash carWash, ConsoleLogger logger) : base(carWash, logger)
         {
-            _carWash = carWash;
-            _logger = logger;
         }
 
-        public void Pricing(Details details)
+        public override void Pricing(Details details)
         {
             _logger.Log("Valuation for a standartd plus program.");
             _logger.Log("Valuation rules.");
