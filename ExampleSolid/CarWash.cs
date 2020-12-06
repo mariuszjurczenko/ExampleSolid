@@ -10,25 +10,28 @@ namespace ExampleSolid
     /// </summary>
     public class CarWash
     {
-        public decimal WashingCost { get; set; } 
+        public decimal WashingCost { get; set; }
+        public ConsoleLogger Logger { get; set; } = new ConsoleLogger();
+        public FileDetailsSource DetailsSource { get; set; } = new FileDetailsSource();
+        public JsonDetailsSerializer DetailsSerializer { get; set; } = new JsonDetailsSerializer();
 
         public void Pricing()
         {
-            Console.WriteLine("Starting pricing.");
-            Console.WriteLine("Loading details.");
+            Logger.Log("Starting pricing.");
+            Logger.Log("Loading details.");
 
-            string detailsJson = File.ReadAllText("details.json");
+            string detailsJson = DetailsSource.GetDetailsFromSource();
 
-            var details = JsonConvert.DeserializeObject<Details>(detailsJson, new StringEnumConverter());
+            var details = DetailsSerializer.GetDetailsFromJsonString(detailsJson);
 
             switch (details.WashingType)
             {
                 case WashingType.Standard:
-                    Console.WriteLine("Valuation for a standartd program.");
-                    Console.WriteLine("Valuation rules.");
+                    Logger.Log("Valuation for a standartd program.");
+                    Logger.Log("Valuation rules.");
                     if (String.IsNullOrEmpty(details.Make))
                     {
-                        Console.WriteLine("Car make must be stated.");
+                        Logger.Log("Car make must be stated.");
                         return;
                     }
                     decimal baseWashingCost = 20 ;
@@ -42,16 +45,16 @@ namespace ExampleSolid
                     break;
 
                 case WashingType.StandardPlus:
-                    Console.WriteLine("Valuation for a standartd plus program.");
-                    Console.WriteLine("Valuation rules.");
+                    Logger.Log("Valuation for a standartd plus program.");
+                    Logger.Log("Valuation rules.");
                     if (String.IsNullOrEmpty(details.Make))
                     {
-                        Console.WriteLine("Car make must be stated");
+                        Logger.Log("Car make must be stated");
                         return;
                     }
                     if (details.VacuumingInside == 0 || details.WashingInside == 0)
                     {
-                        Console.WriteLine("Standard Plus must specify Vacuuming Inside and Washing Inside.");
+                        Logger.Log("Standard Plus must specify Vacuuming Inside and Washing Inside.");
                         return;
                     }
                     baseWashingCost = 25;
@@ -69,8 +72,8 @@ namespace ExampleSolid
                     break;
 
                 case WashingType.Waxing:
-                    Console.WriteLine("Valuation for a waxing program.");
-                    Console.WriteLine("Valuation rules.");
+                    Logger.Log("Valuation for a waxing program.");
+                    Logger.Log("Valuation rules.");
                     baseWashingCost = 40;
                     if (details.Double)
                     {
@@ -80,11 +83,11 @@ namespace ExampleSolid
                     break;
 
                 default:
-                    Console.WriteLine("Unknown type of Washing.");
+                    Logger.Log("Unknown type of Washing.");
                     break;
             }
 
-            Console.WriteLine("Pricing completed.");
+            Logger.Log("Pricing completed.");
         }
     }
 }
