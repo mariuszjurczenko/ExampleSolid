@@ -13,11 +13,6 @@
             _detailsSerializer = detailsSerializer;
         }
 
-        public DetailsPricing CreateDetailsPricingForDetails(Details details, ICarWashContext context)
-        {
-            return new DetailsPricingFactory().Create(details, context);
-        }
-
         public Details GetDetailsFromJsonString(string detailsJson)
         {
             return _detailsSerializer.GetDetailsFromJsonString(detailsJson);

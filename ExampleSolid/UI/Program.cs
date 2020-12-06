@@ -8,7 +8,10 @@ namespace ExampleSolid
         {
             Console.WriteLine("Car Wash Starting...");
 
-            var carWash = new CarWash(new FileLogger(), new FileDetailsSource(), new JsonDetailsSerializer());
+            var logger = new ConsoleLogger();
+
+            var carWash = new CarWash(new FileLogger(), new FileDetailsSource(), new JsonDetailsSerializer(), new DetailsPricingFactory(logger));
+
             carWash.Pricing();
 
             if (carWash.WashingCost > 0)

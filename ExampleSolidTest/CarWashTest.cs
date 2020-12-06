@@ -10,12 +10,14 @@ namespace ExampleSolid.Test
         private FakeLogger logger;
         private FakeDetailsSource detailsSource;
         private FakeDetailsSerializer detailsSerializer;
+        private DetailsPricingFactory detailsPricingFactory;
         public CarWashTest()
         {
             logger = new FakeLogger();
             detailsSource = new FakeDetailsSource();
             detailsSerializer = new FakeDetailsSerializer();
-            carWash = new CarWash(logger, detailsSource, detailsSerializer);
+            detailsPricingFactory = new DetailsPricingFactory(logger);
+            carWash = new CarWash(logger, detailsSource, detailsSerializer, detailsPricingFactory);
         }
 
         [Test]

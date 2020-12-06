@@ -1,5 +1,4 @@
-﻿using ExampleSolid;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Linq;
 
 namespace ExampleSolid.Test
@@ -20,7 +19,8 @@ namespace ExampleSolid.Test
 
         [Test]
         public void SetsRatingTo1000ForBMWWith250Deductible()
-        {
+        { 
+            var logger = new FakeLogger();
             var details = new Details()
             {
                 WashingType = WashingType.Standard,
@@ -28,12 +28,10 @@ namespace ExampleSolid.Test
                 Rinsing = 7,
                 Drying = 10
             };
-            var carWashUpdater = new FakeCarWashUpdater(); 
-            var pricing = new StandardDetailsPricing(carWashUpdater);
 
-            pricing.Pricing(details);
+            var pricing = new StandardDetailsPricing(logger);
 
-            Assert.AreEqual(37, carWashUpdater.NewWashingCost.Value);
+            Assert.AreEqual(37, pricing.Pricing(details));
         }
     }
 }

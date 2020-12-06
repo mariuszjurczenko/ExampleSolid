@@ -2,13 +2,12 @@
 {
     public abstract class DetailsPricing
     {
-        protected readonly ICarWashUpdater _carWashUpdater;
-        public ILogger Logger { get; set; } = new ConsoleLogger();
+        public ILogger Logger { get; set; } 
 
-        public DetailsPricing(ICarWashUpdater carWashUpdater) 
+        public DetailsPricing(ILogger logger) 
         {
-            _carWashUpdater = carWashUpdater;
+            Logger = logger;
         }
-        public abstract void Pricing(Details details);
+        public abstract decimal Pricing(Details details);
     }
 }

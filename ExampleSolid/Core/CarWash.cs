@@ -8,15 +8,17 @@
         private readonly ILogger _logger;
         private readonly IDetailsSource _detailsSource;
         private readonly IDetailsSerializer _detailsSerializer;
+        private readonly DetailsPricingFactory _detailsPricingFactory;
 
         public decimal WashingCost { get; set; }
         public ICarWashContext Context { get; set; }
 
-        public CarWash(ILogger logger, IDetailsSource detailsSource, IDetailsSerializer detailsSerializer)
+        public CarWash(ILogger logger, IDetailsSource detailsSource, IDetailsSerializer detailsSerializer, DetailsPricingFactory detailsPricingFactory)
         {
             _logger = logger;
             _detailsSource = detailsSource;
             _detailsSerializer = detailsSerializer;
+            _detailsPricingFactory = detailsPricingFactory;
             Context = new DefaultContext(_detailsSource, _detailsSerializer);
             Context.CarWash = this;
         }
@@ -30,9 +32,9 @@
 
             var details = _detailsSerializer.GetDetailsFromJsonString(detailsJson);
 
-            var pricing = Context.CreateDetailsPricingForDetails(details, Context);
+            var pricing = _detailsPricingFactory.Create(details, Context); 
 
-            pricing.Pricing(details);
+            WashingCost = pricing.Pricing(details);
 
             _logger.Log("Pricing completed.");
         }

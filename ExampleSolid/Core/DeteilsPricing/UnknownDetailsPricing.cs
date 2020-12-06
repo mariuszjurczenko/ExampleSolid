@@ -2,13 +2,14 @@
 {
     public class UnknownDetailsPricing : DetailsPricing
     {
-        public UnknownDetailsPricing(ICarWashUpdater carWashUpdater) : base(carWashUpdater)
+        public UnknownDetailsPricing(ILogger logger) : base(logger)
         {
         }
 
-        public override void Pricing(Details details)
+        public override decimal Pricing(Details details)
         {
             Logger.Log("Unknown type of Washing.");
+            return 0;
         }
     }
 }

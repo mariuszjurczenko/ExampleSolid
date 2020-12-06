@@ -2,11 +2,11 @@
 {
     public class WaxingDetailsPricing : DetailsPricing
     {
-        public WaxingDetailsPricing(ICarWashUpdater carWashUpdater) : base(carWashUpdater)
+        public WaxingDetailsPricing(ILogger logger) : base(logger)
         {
         }
 
-        public override void Pricing(Details details)
+        public override decimal Pricing(Details details)
         {
             Logger.Log("Valuation for a waxing program.");
             Logger.Log("Valuation rules.");
@@ -15,7 +15,7 @@
             {
                 baseWashingCost = baseWashingCost * 3;
             }
-            _carWashUpdater.UpdateWashingCost(baseWashingCost);
+            return baseWashingCost;
         }
     }
 }
