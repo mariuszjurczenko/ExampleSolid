@@ -19,5 +19,8 @@
         public bool Double { get; set; }
         #endregion
 
+        #region Premium
+        public decimal Coffee { get; set; }
+        #endregion
     }
 }

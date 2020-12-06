@@ -4,6 +4,7 @@
     {
         Standard = 0,
         StandardPlus = 1,
-        Waxing = 2
+        Waxing = 2,
+        Premium = 3
     }
 }

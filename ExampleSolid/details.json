@@ -1,6 +1,7 @@
 {
-  "WashingType": "Standard",
+  "WashingType": "Premium",
   "Make": "Ferrari",
   "Rinsing": 7,
-  "Drying": 10
+  "Drying": 10,
+  "Coffee": 15
 }

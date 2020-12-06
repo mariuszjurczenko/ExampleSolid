@@ -15,6 +15,9 @@
                 case WashingType.Waxing:
                     return new WaxingDetailsPricing(carWash, carWash.Logger);
 
+                case WashingType.Premium:
+                    return new PremiumDetailsPricing(carWash, carWash.Logger);
+
                 default:
                     return null;
             }

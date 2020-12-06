@@ -13,7 +13,13 @@
   "WashingType": "Waxing",
   "Double": "true"
 }
-
+{
+  "WashingType": "Premium",
+  "Make": "Ferrari",
+  "Rinsing": 7,
+  "Drying": 10,
+  "Coffee": 15
+}
 {
   "WashingType": "Standard",
   "Make": "Ford",
